@@ -3,6 +3,8 @@ from fastapi.responses import HTMLResponse
 from fastapi.middleware.cors import CORSMiddleware
 import os
 
+from fastapi.templating import Jinja2Templates
+
 app = FastAPI()
 
 # Add CORS middleware
@@ -14,54 +16,12 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-@app.get("/")
-async def root():
-    return {"message": "CV Processor API is running"}
+# Initialize Jinja2Templates
+templates = Jinja2Templates(directory="templates")
 
-@app.get("/ui", response_class=HTMLResponse)
-async def ui():
-    return """
-    <!DOCTYPE html>
-    <html>
-    <head>
-        <title>CV Processor</title>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <style>
-            body { font-family: system-ui, -apple-system, sans-serif; margin: 0; padding: 20px; }
-            .container { max-width: 800px; margin: 0 auto; }
-            .status { margin-top: 20px; padding: 10px; border-radius: 4px; }
-            .success { background-color: #e6ffe6; }
-            .error { background-color: #ffe6e6; }
-        </style>
-    </head>
-    <body>
-        <div class="container">
-            <h1>CV Processor</h1>
-            <p>Welcome to the CV Processor. This is a public endpoint.</p>
-            <div id="status"></div>
-        </div>
-        <script>
-            fetch('/')
-                .then(response => response.json())
-                .then(data => {
-                    document.getElementById('status').innerHTML = `
-                        <div class="status success">
-                            ${data.message}
-                        </div>
-                    `;
-                })
-                .catch(error => {
-                    document.getElementById('status').innerHTML = `
-                        <div class="status error">
-                            Error: ${error.message}
-                        </div>
-                    `;
-                });
-        </script>
-    </body>
-    </html>
-    """
+@app.get("/", response_class=HTMLResponse)
+async def ui(request: Request):
+    return templates.TemplateResponse("index.html", {"request": request})
 
 @app.get("/health")
 async def health():
