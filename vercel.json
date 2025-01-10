@@ -4,13 +4,25 @@
     "builds": [
       {
         "src": "api/index.py",
-        "use": "@vercel/python"
+        "use": "@vercel/python",
+        "config": { "maxLambdaSize": "15mb" }
       }
     ],
     "routes": [
       {
-        "src": "/(.*)",
+        "src": "/",
         "dest": "api/index.py"
+      },
+      {
+        "src": "/ui",
+        "dest": "api/index.py"
+      },
+      {
+        "src": "/health",
+        "dest": "api/index.py"
+      },
+      {
+        "handle": "filesystem"
       }
     ]
   }
