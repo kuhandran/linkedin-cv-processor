@@ -23,9 +23,9 @@ app.mount("/static", StaticFiles(directory="static"), name="static")
 
 # Include routes
 app.include_router(root.router)
-app.include_router(question.router)
-app.include_router(profile.router)
-app.include_router(languages.router)
+# app.include_router(question.router)
+# app.include_router(profile.router)
+# app.include_router(languages.router)
 
 if __name__ == "__main__":
     import uvicorn
