@@ -26,22 +26,30 @@ This project is a FastAPI application for processing CVs. It extracts informatio
 
 2. Create a virtual environment and activate it:
 
- ```sh
+ ``sh
     python -m venv venv
     source venv/bin/activate  # On Windows use `venv\Scripts\activate`
 
 3. Install the dependencies:
+   ``sh
+   pip install -r requirements.txt
 
-pip install -r requirements.txt
-
-Set up MongoDB:
+4. Set up MongoDB:
 
 Ensure MongoDB is running and accessible.
-Update the MongoDB connection URI in profile_model.py if necessary.
-Running the Application
-Start the FastAPI application:
+   Update the MongoDB connection URI in profile_model.py if necessary.
+   Running the Application
+   Start the FastAPI application:
 
+5. Running the Application
+   Start the FastAPI application:
+    ``sh
+   uvicorn main:app --reload
 
+6. Deployment
+   Deploy the project:
+    ``sh
+   vercel
 
 ### Explanation
 
