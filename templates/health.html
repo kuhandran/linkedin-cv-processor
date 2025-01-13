@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Health Status</title>
+    <link href="{{ url_for('static', path='styles.css') }}" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <h1>Health Status</h1>
+        <div id="status" class="status">Loading status...</div>
+    </div>
+    <script>
+        async function fetchHealthStatus() {
+            const response = await fetch('/api/health');
+            const data = await response.json();
+            document.getElementById('status').textContent = `Status: ${data.status}`;
+        }
+        fetchHealthStatus();
+    </script>
+</body>
+</html>

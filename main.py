@@ -1,9 +1,11 @@
-from fastapi import FastAPI, Request
-from fastapi.templating import Jinja2Templates
-from fastapi.staticfiles import StaticFiles
+import logging
+from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from routes import cv_processor
-import os
+from starlette.staticfiles import StaticFiles
+from api.routes import root, question, profile, languages
+
+logging.basicConfig(level=logging.INFO)
+logger = logging.getLogger(__name__)
 
 app = FastAPI()
 
@@ -19,22 +21,12 @@ app.add_middleware(
 # Mount static files
 app.mount("/static", StaticFiles(directory="static"), name="static")
 
-# Set up Jinja2 templates
-templates = Jinja2Templates(directory="templates")
+# Include routes
+app.include_router(root.router)
+app.include_router(question.router)
+app.include_router(profile.router)
+app.include_router(languages.router)
 
-# Include our CV processing routes
-app.include_router(cv_processor.router)
-
-@app.get("/")
-async def read_root(request: Request):
-    return templates.TemplateResponse("index.html", {"request": request})
-
-@app.get("/health")
-async def health_check():
-    return {"status": "healthy"}
-
-# This is for local development
 if __name__ == "__main__":
     import uvicorn
     uvicorn.run(app, host="0.0.0.0", port=8000)
-
