@@ -2,3 +2,8 @@ fastapi
 uvicorn
 jinja2==3.0.3
 starlette
+transformers
+torch
+pymongo
+pdfplumber
+python-multipart
