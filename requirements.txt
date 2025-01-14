@@ -6,3 +6,4 @@ transformers
 pymongo
 pdfplumber
 python-multipart
+spacy

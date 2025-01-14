@@ -3,7 +3,7 @@ from pymongo.errors import PyMongoError
 from helpers.logger import logger
 
 # Set up MongoDB client using URI
-client = MongoClient("mongodb+srv://skuhandran:QWERTYUI@data-services.itent.mongodb.net/data-services?retryWrites=true&w=majority")
+client = MongoClient("mongodb+srv://skuhandran:H8tpfKQ5ir4HRKqT@data-services.itent.mongodb.net/?retryWrites=true&w=majority&appName=data-services")
 
 # Use the 'data-services' database
 db = client["data-services"]

@@ -2,7 +2,7 @@ import os
 import json
 
 from services.file_processing import extract_text_from_pdf
-# from app.modules.contact_extraction import extract_contact
+from services.extract_contact import extract_contact
 # from app.modules.skill_extraction import extract_top_skills
 # from app.modules.language_detection import extract_languages
 # from app.modules.education_extraction import extract_education
@@ -20,6 +20,8 @@ def extract_with_error_handling(func, lines):
 
 def process_cv_with_debug(pdf_file):
     lines = extract_text_from_pdf(pdf_file)
+
+    print(f"Extracted {(lines)}")
     
     # resume_info = {
     #     "Contact": extract_with_error_handling(extract_contact, lines),
@@ -33,7 +35,7 @@ def process_cv_with_debug(pdf_file):
     # }
 
     resume_info = {
-        "Contact": [],
+        "Contact": extract_with_error_handling(extract_contact, lines),
         "Top Skills": [],
         "Languages": [],
         "Certifications": [], # Implement as needed

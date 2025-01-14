@@ -1,5 +1,11 @@
 {
-    "Contact": [],
+    "Contact": {
+        "Name": "Kuhandran SamudraPandiyan",
+        "Phone": "+60149337280",
+        "Email": "skuhandran@yahoo.com",
+        "Location": "",
+        "PhoneType": "Home"
+    },
     "Top Skills": [],
     "Languages": [],
     "Certifications": [],
