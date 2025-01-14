@@ -1,4 +1,5 @@
 import logging
+import os
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from starlette.staticfiles import StaticFiles
@@ -18,14 +19,19 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-# Mount static files
+# Include essential routes
+app.include_router(root.router)
+
+# Mount static files after including routes
 app.mount("/static", StaticFiles(directory="static"), name="static")
 
-# Include routes
-app.include_router(root.router)
-# app.include_router(question.router)
-# app.include_router(profile.router)
-# app.include_router(languages.router)
+# Load additional routes conditionally
+# load_all_routes = os.getenv("LOAD_ALL_ROUTES", "false").lower() == "true"
+
+# if load_all_routes:
+#     app.include_router(question.router)
+#     app.include_router(profile.router)
+#     app.include_router(languages.router)
 
 if __name__ == "__main__":
     import uvicorn
