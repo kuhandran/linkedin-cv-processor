@@ -5,4 +5,4 @@ starlette
 transformers
 pymongo
 pdfplumber
-torch
+python-multipart
